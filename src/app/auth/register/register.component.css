@@ -1,0 +1,77 @@
+.bg-img{
+    background-image: url(../../../assets/img/bg2.jpg);
+    height: 100vh;
+    width: 100%;
+}
+
+.register{
+    height: 100vh;
+}
+
+.register-form{
+    margin-top: 20px;
+}
+
+.register-form h3{
+    text-align: center;
+    color: rgb(111, 111, 235);
+}
+
+.register-form .form-group{
+    /* margin-top: 1px; */
+    margin-bottom: 9px;
+
+}
+
+.register-form .form-label{
+    font-weight: 700;
+    color:rgb(111, 111, 235);
+
+}
+
+.register-form .form-control{
+    border-radius: 15px;
+    height: 35px;
+}
+
+.register-form .radio-alignment{
+    margin-left: 20px;
+    font-size: 14px;
+}
+
+/* .register-form .form-control .option{
+    border-radius: 15px;
+    background-color: rgb(111, 111, 235);
+} */
+
+.register-form .submit-btn{
+    width: 60%;
+    margin-left: 70px;
+    color: white;
+    font-weight: 700;
+    text-align: center;
+    border-radius: 15px;
+    padding:8px;
+    border: none;
+    background-color: rgb(166, 166, 248);
+}
+
+.register-form .invalid{
+    color: red;
+    text-transform: lowercase;
+    font-weight: 700;
+    font-size: 12px;
+    float: right;
+    /* text-align: right; */
+    margin-right: 20px;
+    padding-top: 5px;
+    /* background-color: black; */
+} 
+
+.register-form .submit-btn:focus{
+    background-color: rgb(120, 120, 248);
+}
+
+.register-form .submit-btn:hover{
+    background-color: rgb(120, 120, 248);
+}

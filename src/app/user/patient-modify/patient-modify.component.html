@@ -1,0 +1,193 @@
+<app-header [navigationitems]="userSideNavigationdata"></app-header>
+
+<div class="container-fluid mr-top">
+  <p-table
+    #dt
+    [value]="listOfAppointment"
+    dataKey="id"
+    [rows]="10"
+    [showCurrentPageReport]="true"
+    [rowsPerPageOptions]="[10, 25, 50]"
+    [loading]="loading"
+    styleClass="p-datatable-customers p-datatable-gridlines"
+    [paginator]="true"
+    currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+    [globalFilterFields]="['physicianName','physicianId','chooseDate','time','appointmentId','patientId','descriptiveInfo','patientInfo','action',]"
+  >
+    <ng-template pTemplate="caption">
+      <div class="p-d-flex">
+        <button
+          pButton
+          pRipple
+          label="New"
+          icon="pi pi-plus"
+          [routerLink]="['addschedule']"
+          class="p-button-success p-mr-2"
+        ></button>
+        <button
+          pButton
+          label="Clear"
+          class="p-button-outlined"
+          icon="pi pi-filter-slash"
+          (click)="clear(dt)"
+        ></button>
+        <span class="p-input-icon-left p-ml-auto" id="search">
+          <i class="pi pi-search"></i>
+          <input
+            pInputText
+            type="text"
+            (input)="dt.filterGlobal($any($event.target).value, 'contains')"
+            placeholder="Search keyword"
+          />
+        </span>
+      </div>
+    </ng-template>
+    <ng-template pTemplate="header">
+      <tr>
+        <th scope="col">
+          <div class="p-d-flex p-jc-between p-ai-center">
+            Physician Name
+            <p-columnFilter
+              type="text"
+              field="name"
+              display="menu"
+            ></p-columnFilter>
+          </div>
+        </th>
+        <th scope="col">
+          <div class="p-d-flex p-jc-between p-ai-center">
+            Physician Id
+            <p-columnFilter
+              type="text"
+              field="id"
+              display="menu"
+            ></p-columnFilter>
+          </div>
+        </th>
+        <th scope="col">
+          <div class="p-d-flex p-jc-between p-ai-center">
+            Date
+          </div>
+        </th>
+        <th scope="col">
+          <div class="p-d-flex p-jc-between p-ai-center">
+            Time
+              <ng-template
+                pTemplate="filter"
+                let-value
+                let-filter="filterCallback"
+              >
+                <p-dropdown
+                  [ngModel]="value"
+                  [options]="statuses"
+                  (onChange)="filter($event.value)"
+                  placeholder="Any"
+                >
+                  <ng-template let-option pTemplate="item">
+                    <span [class]="'customer-badge status-' + option.value">{{
+                      option.label
+                    }}</span>
+                  </ng-template>
+                </p-dropdown>
+              </ng-template>
+          </div>
+        </th>
+        <th scope="col">
+          <div class="p-d-flex p-jc-between p-ai-center">
+            Appointment Id
+            <p-columnFilter
+              type="text"
+              field="name"
+              display="menu"
+            ></p-columnFilter>
+          </div>
+        </th>
+        <th scope="col">
+          <div class="p-d-flex p-jc-between p-ai-center">
+            Patient Id
+            <p-columnFilter
+              type="text"
+              field="id"
+              display="menu"
+            ></p-columnFilter>
+          </div>
+        </th>
+        <th scope="col">
+          <div class="p-d-flex p-jc-between p-ai-center">
+            Descriptive Info
+          </div>
+        </th>
+        <th scope="col">
+          <div class="p-d-flex p-jc-between p-ai-center">
+            Patient Name
+          </div>
+        </th>
+        <th style="width: 13%;">
+          <div class="p-d-flex p-jc-between p-ai-center">
+            Action
+          </div>
+        </th>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-data>
+      <tr>
+        <td>
+          {{ data.employee.firstName }}
+        </td>
+        <td>
+          <span>{{ data.employee.employeeId }}</span>
+        </td>
+        <td>
+          <span>{{ data.date }}</span>
+        </td>
+        <td>
+          {{ data.time }}
+        </td>
+        <td>
+          <span>{{ data.appointmentId }}</span>
+        </td>
+        <td>
+          <span>{{ data.patient.patientId }}</span>
+        </td>
+        <td>
+          <span>{{ data.description }}</span>
+        </td>
+        <td>
+          <span>{{ data.patient.name }}</span>
+        </td>
+        <td>
+          <button
+            class="btn btn-primary btn-cus-link1"
+            [routerLink]="['editschedule']"
+          >
+            Edit
+          </button> |
+          <button class="btn btn-danger btn-cus-link1" (click)="onDelete()">
+            Delete
+          </button>
+        </td>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="emptymessage">
+      <tr>
+        <td colspan="7">No Staff found.</td>
+      </tr>
+    </ng-template>
+  </p-table>
+  <p-dialog header="confirmation" [(visible)]="displayDialog" [modal]="true" [style]="{width: '50vw'}" [responsive]="true">
+    <div>
+      <i class="pi-pi-info-circle" style="vertical-align: sub; font-size: 1.5cm;"></i>
+      Please specify the reason to Delete:- <span class="nodeColorRed"></span>
+    </div>
+    <div>
+      <input type="text" class="margin-top-5"  pInputText/>
+    </div>
+    <p-footer>
+      <button pButton type="button" label="ok" 
+      ></button>
+      <button pButton type="button" lable="cancel" 
+      class="margin-left-10" >Cancel</button>
+    </p-footer>
+  </p-dialog>
+</div>
+<app-footer></app-footer>

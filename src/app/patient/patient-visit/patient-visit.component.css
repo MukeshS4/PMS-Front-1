@@ -1,0 +1,78 @@
+.register{
+    background-color: white;
+}
+.register-form{
+    margin-top: 20px;
+}
+
+.register-form h2{
+    text-align: center;
+    color:black;
+}
+
+.register-form .form-group{
+    /* margin-top: 1px; */
+    margin-bottom: 9px;
+
+}
+
+.register-form .form-label{
+    font-weight: 700;
+    color:black;
+
+}
+
+.register-form .form-control{
+    border-radius: 10px;
+    height: 35px;
+    width: 40%;
+}
+.register-form .radio-alignment{
+    margin-left: 20px;
+    font-size: 14px;
+}
+.register-form .form-check-label{
+    font-weight: 700;
+    color:black;
+}
+.register-form .invalid{
+    color: red;
+    /* text-transform: lowercase; */
+    font-weight: 700;
+    font-size: 12px;
+    /* float: right; */
+    /* text-align: right; */
+    margin-right: 20px;
+    padding-top: 5px;
+    /* background-color: black; */
+}
+
+/****CSS FOR PATIENT FORM*****/
+
+.section-title {
+    font-size: 20px;
+    color: #0080db;
+    border-bottom: 1px solid #0080db;
+}
+h2{
+    font-size: 25px;
+    color: #0080db;
+    /* border-bottom: 1px solid #0080db; */
+}
+
+.section-body {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 100%;
+    overflow-y: auto;
+}
+
+.card{
+    width:50%;
+}
+@media only screen and (max-width: 768px) {
+    .card{
+        width:100%;
+    }  
+}

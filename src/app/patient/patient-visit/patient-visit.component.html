@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <app-header [navigationitems]= sideNavigationdata></app-header>
+    <div class="container d-flex justify-content-center mt-5 mb-5">
+      <div class="card ">
+          <div class="card-header text-center h4">
+              Patient Visit
+          </div>
+          <div class="card-body d-block">
+              <form [formGroup]="PvisitForm" (ngSubmit)="onSubmit()">
+                  <div class="mb-3">
+                      <label for="height" class="form-label">Height: </label>
+                      <input id="height" type="number" class="form-control" formControlName="height" placeholder="(in cm)">
+                      <span class="text-danger"
+                          *ngIf="(registerFormControl.height.touched || submitted) && registerFormControl.height.errors?.required">
+                          "Height is required"
+                      </span>
+                  </div>
+                  <div class="mb-3">
+                      <label for="weight" class="form-label">Weight: </label>
+                      <input id="weight" type="number" class="form-control" formControlName="weight" placeholder="(in Kg)">
+                      <span class="text-danger"
+                          *ngIf="(registerFormControl.weight.touched || submitted) && registerFormControl.weight.errors?.required">
+                          "Weight is required"
+                      </span>
+                  </div>
+                  <div class="mb-3">
+                      <label for="bloodPressure" class="form-label">Blood Pressure: </label>
+                      <input id="bloodPressure" type="text" class="form-control" formControlName="bloodPressure" placeholder="(systolic / diastolic in mm Hg)">
+                      <span class="text-danger"
+                          *ngIf="(registerFormControl.bloodPressure.touched || submitted) && registerFormControl.bloodPressure.errors?.required">
+                          "Blood Pressure is required"
+                      </span>
+                  </div>
+                  <div class="mb-3">
+                      <label for="bodyTemp" class="form-label">Body Temperature: </label>
+                      <input id="bodyTemp" type="text" class="form-control" formControlName="bodyTemp" placeholder="(in Fahrenheit)">
+                      <span class="text-danger"
+                          *ngIf="(registerFormControl.bodyTemp.touched || submitted) && registerFormControl.bodyTemp.errors?.required">
+                          "Body Temperature is required"
+                      </span>
+                  </div>
+                  <div class="mb-3">
+                      <label for="respirationRate" class="form-label">Respiration Rate: </label>
+                      <input id="respirationRate" type="text" class="form-control" formControlName="respirationRate" placeholder="(in BPM)">
+                      <span class="text-danger"
+                          *ngIf="(registerFormControl.respirationRate.touched || submitted) && registerFormControl.respirationRate.errors?.required">
+                          "Respiration Rate is required"
+                      </span>
+                  </div>
+                  <h2>Diagnosis</h2>
+                  <div class="mb-3">
+                      <label for="diagnosisCd" class="form-label">Diagnosis_Code: </label>
+                      <input id="diagnosisCd" type="text" class="form-control" formControlName="diagnosisCd" placeholder="(A00, A00.1, B00)">
+                      <span class="text-danger"
+                          *ngIf="(registerFormControl.diagnosisCd.touched || submitted) && registerFormControl.diagnosisCd.errors?.required">
+                          "Diagnosis_Code is required"
+                      </span>
+                  </div>
+                  <div class="mb-3">
+                      <label for="diagnosisDesc" class="form-label">Diagnosis_Description: </label>
+                      <textarea class="form-control" id="exampleFormControlTextarea1" name="diagnosisDesc" rows="3" formControlName="diagnosisDesc"></textarea>
+                      <span class="text-danger"
+                      *ngIf="(registerFormControl.diagnosisDesc.touched || submitted) && registerFormControl.diagnosisDesc.errors?.required">
+                      "Diagnosis_Description is required"
+                  </span>
+                  </div>
+                  <div class="mb-3">
+                      <label for="diagnosisIsDepricated"  style="margin-right: 10px;">Diagnosis_Is_Depricated</label>
+                      <div class="form-check form-check-inline">
+                          <input class="form-check-input" type="radio" name="diagnosisIsDepricated" id="inlineRadio1" value="Yes"
+                              formControlName="diagnosisIsDepricated">
+                          <label class="form-check-label" for="inlineRadio1">Yes</label>
+                      </div>
+                      <div class="form-check form-check-inline">
+                          <input class="form-check-input" type="radio" name="diagnosisIsDepricated" id="inlineRadio2" value="No"
+                              formControlName="diagnosisIsDepricated" checked>
+                          <label class="form-check-label" for="inlineRadio2">No</label>
+                      </div>
+                      <span class="text-danger"
+                      *ngIf="(registerFormControl.diagnosisIsDepricated.touched || submitted) && registerFormControl.diagnosisIsDepricated.errors?.required">
+                      "Diagnosis_Is_Depricated is required"
+                  </span>
+                  </div>
+                  <h2>Procedure</h2>
+                  <div class="mb-3">
+                      <label for="procedureCd" class="form-label">Procedure_Code: </label>
+                      <input id="procedureCd" type="text" class="form-control" formControlName="procedureCd" placeholder="(001607A)">
+                      <span class="text-danger"
+                          *ngIf="(registerFormControl.procedureCd.touched || submitted) && registerFormControl.procedureCd.errors?.required">
+                          "Procedure_Code is required"
+                      </span>
+                  </div>
+                  <div class="mb-3">
+                      <label for="procedureDesc" class="form-label">Procedure_Description: </label>
+                      <textarea class="form-control" id="exampleFormControlTextarea1" name="procedureDesc" rows="3" formControlName="procedureDesc"></textarea>
+                      <span class="text-danger"
+                      *ngIf="(registerFormControl.procedureDesc.touched || submitted) && registerFormControl.procedureDesc.errors?.required">
+                      "Procedure_Description is required"
+                  </span>
+                  </div>
+                  <div class="mb-3">
+                      <label for="procedureIsDepricated"  style="margin-right: 10px;">Procedure_Is_Depricated</label>
+                      <div class="form-check form-check-inline">
+                          <input class="form-check-input" type="radio" name="procedureIsDepricated" id="inlineRadio1" value="Yes"
+                              formControlName="procedureIsDepricated">
+                          <label class="form-check-label" for="inlineRadio1">Yes</label>
+                      </div>
+                      <div class="form-check form-check-inline">
+                          <input class="form-check-input" type="radio" name="procedureIsDepricated" id="inlineRadio2" value="No"
+                              formControlName="procedureIsDepricated" checked>
+                          <label class="form-check-label" for="inlineRadio2">No</label>
+                      </div>
+                      <span class="text-danger"
+                      *ngIf="(registerFormControl.procedureIsDepricated.touched || submitted) && registerFormControl.procedureIsDepricated.errors?.required">
+                      "Procedure_Is_Depricated is required"
+                  </span>
+                  </div>
+                  <h2>DrugData</h2>
+                  <div class="mb-3">
+                      <label for="drugID" class="form-label">Drug_ID: </label>
+                      <input id="drugID" type="text" class="form-control" formControlName="drugID" placeholder="(Snomed-ct)">
+                      <span class="text-danger"
+                          *ngIf="(registerFormControl.drugID.touched || submitted) && registerFormControl.drugID.errors?.required">
+                          "Drug_ID is required"
+                      </span>
+                  </div>
+                  <div class="mb-3">
+                      <label for="drugName" class="form-label">Drug_Name: </label>
+                      <input id="drugName" type="text" class="form-control" formControlName="drugName">
+                      <span class="text-danger"
+                          *ngIf="(registerFormControl.drugName.touched || submitted) && registerFormControl.drugName.errors?.required">
+                          "Drug_Name is required"
+                      </span>
+                  </div>
+                  <div class="mb-3">
+                      <label for="drugGenName" class="form-label">Drug_Generic_Name: </label>
+                      <input id="drugGenName" type="text" class="form-control" formControlName="drugGenName">
+                      <span class="text-danger"
+                          *ngIf="(registerFormControl.drugGenName.touched || submitted) && registerFormControl.drugGenName.errors?.required">
+                          "Drug_Generic_Name is required"
+                      </span>
+                  </div>
+                  <div class="mb-3">
+                      <label for="drugBrandName" class="form-label">Drug_Brand_Name: </label>
+                      <input id="drugBrandName" type="text" class="form-control" formControlName="drugBrandName">
+                      <span class="text-danger"
+                          *ngIf="(registerFormControl.drugBrandName.touched || submitted) && registerFormControl.drugBrandName.errors?.required">
+                          "Drug_Brand_Name is required"
+                      </span>
+                  </div>
+                  <div class="mb-3">
+                      <label for="drugForm" class="form-label">Drug_Form: </label>
+                      <textarea class="form-control" id="exampleFormControlTextarea1" name="drugForm" rows="3" formControlName="drugForm"></textarea>
+                      <span class="text-danger"
+                      *ngIf="(registerFormControl.drugForm.touched || submitted) && registerFormControl.drugForm.errors?.required">
+                      "Drug_Form is required"
+                  </span>
+                  </div>
+                  <div class="mb-3">
+                      <label for="drugStrength" class="form-label">Drug_Strength: </label>
+                      <textarea class="form-control" id="exampleFormControlTextarea1" name="drugStrength" rows="3" formControlName="drugStrength"></textarea>
+                      <span class="text-danger"
+                      *ngIf="(registerFormControl.drugStrength.touched || submitted) && registerFormControl.drugStrength.errors?.required">
+                      "Drug_Strength is required"
+                  </span>
+                  </div>
+                  <div class="mb-3">
+                      <button type="submit" class="btn btn-success">Submit</button>
+                  </div>
+                  
+              </form>
+          </div>
+      </div>
+  </div>
+      
+  </body>
+</html>

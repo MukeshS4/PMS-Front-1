@@ -1,0 +1,169 @@
+<app-header [navigationitems]="userSideNavigationdata"></app-header>
+<!-- app.component.html -->
+<mat-tab-group mat-stretch-tabs class="">
+  <mat-tab label="Upcoming Appointment">
+    <div class="container text-center">
+      <table
+        mat-table
+        [dataSource]="dataSource"
+        #mytable
+        class="my-table mat-elevation-z8"
+      >
+        <!--- Note that these columns can be defined in any order.
+            The actual rendered columns are set as a property on the row definition" -->
+
+        <!-- Id Column -->
+        <ng-container matColumnDef="appointmentId">
+          <th mat-header-cell *matHeaderCellDef>Appointment Id</th>
+          <td mat-cell *matCellDef="let element">
+            {{ element.appointmentId }}
+          </td>
+        </ng-container>
+
+        <!-- Name Column -->
+        <ng-container matColumnDef="appointmentDescription">
+          <th mat-header-cell *matHeaderCellDef>Appointment Description</th>
+          <td mat-cell *matCellDef="let element">
+            {{ element.description }}
+          </td>
+        </ng-container>
+
+        <!-- Action Column -->
+
+        <ng-container matColumnDef="date">
+          <th mat-header-cell *matHeaderCellDef>Date</th>
+          <td mat-cell *matCellDef="let element">{{ element.date }}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="time">
+          <th mat-header-cell *matHeaderCellDef>Time</th>
+          <td mat-cell *matCellDef="let element">{{ element.time }}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="patientInfo">
+          <th mat-header-cell *matHeaderCellDef>Patient Details</th>
+          <td mat-cell *matCellDef="let element">{{ element.patient.patientId }}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="editHistory">
+          <th mat-header-cell *matHeaderCellDef>Patient Name</th>
+          <td mat-cell *matCellDef="let element">{{ element.patient.name }}</td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+      </table>
+    </div>
+  </mat-tab>
+  <mat-tab label="Notes">
+    <div class="container-fluid mr-top">
+      <p-table
+        #dt
+        [value]="notes"
+        dataKey="senderDesignation"
+        [rows]="20"
+        [showCurrentPageReport]="true"
+        [rowsPerPageOptions]="[10,25,50]"
+        [loading]="loading"
+        styleClass="p-datatable-customers p-datatable-gridlines"
+        [paginator]="true"
+        currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+        [globalFilterFields]="['senderName', 'senderDesignation', 'message']"
+      >
+        <ng-template pTemplate="caption">
+          <div class="p-d-flex">
+            <button
+              pButton
+              pRipple
+              label="Compose"
+              icon="pi pi-plus"
+              [routerLink]="['sendnotes']"
+              class="p-button-success p-mr-2"
+            ></button>
+          </div>
+        </ng-template>
+        <ng-template pTemplate="header">
+          <tr>
+            <th scope="col">
+              <div class="p-d-flex p-jc-between p-ai-center">
+                Sender Name
+                <p-columnFilter
+                  type="text"
+                  field="name"
+                  display="menu"
+                ></p-columnFilter>
+              </div>
+            </th>
+            <th scope="col">
+              <div class="p-d-flex p-jc-between p-ai-center">
+                Sender Designation
+                <p-columnFilter
+                  type="text"
+                  field="id"
+                  display="menu"
+                ></p-columnFilter>
+              </div>
+            </th>
+            <th scope="col">
+              <div class="p-d-flex p-jc-between p-ai-center">
+                Message
+              </div>
+            </th>
+            <th scope="col">
+              <div class="p-d-flex p-jc-between p-ai-center">
+                Time
+                  <ng-template
+                    pTemplate="filter"
+                    let-value
+                    let-filter="filterCallback"
+                  >
+                    <p-dropdown
+                      [ngModel]="value"
+                      [options]="statuses"
+                      (onChange)="filter($event.value)"
+                      placeholder="Any"
+                    >
+                      <ng-template let-option pTemplate="item">
+                        <span [class]="'customer-badge status-' + option.value">{{
+                          option.label
+                        }}</span>
+                      </ng-template>
+                    </p-dropdown>
+                  </ng-template>
+              </div>
+            </th>
+            <th>
+              <div class="p-d-flex p-jc-between p-ai-center">
+                Action
+              </div>
+            </th>
+          </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-h>
+          <tr>
+            <td>
+              {{ h.receiverName }}
+            </td>
+            <td>
+              <span>{{ h.receiverDesignation }}</span>
+            </td>
+            <td>
+              <span>{{ h.message }}</span>
+            </td>
+            <td>
+              {{ h.dateTime }}
+            </td>
+            
+            <td>
+              <button class="btn btn-primary" [routerLink]="['sendnotes']">
+                Reply
+              </button>
+            </td>
+          </tr>
+        </ng-template>
+      </p-table>
+    </div>
+  </mat-tab>
+</mat-tab-group>
+
+<app-footer></app-footer>
