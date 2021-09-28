@@ -17,7 +17,9 @@ export class AddScheduleComponent implements OnInit {
   userSideNavigationdata : SideNavigationItem[] = userSideNavigationItem;
 
   submitted = false;
-  addSchedule!: FormGroup;
+  //addSchedule!: FormGroup;
+
+  form: FormGroup = new FormGroup({});
 
   todayNumber: number = Date.now();
   todayDate : Date = new Date();
@@ -42,12 +44,11 @@ export class AddScheduleComponent implements OnInit {
 
   ngOnInit(): void {
 
-    this.addSchedule = this.formBuilder.group({
-      patient: new FormControl(),
-      employee: new FormControl(),
-      date: new FormControl(),
-      time: new FormControl(),
-      description: new FormControl()
+    this.form = new FormGroup({
+      patient: new FormControl(null, [Validators.required]),
+      employee: new FormControl(null, [Validators.required]),
+      time: new FormControl(null, [Validators.required]),
+      description: new FormControl(null, [Validators.required])
     });
 
     this.listOfPhysician=this.scheduleService.getAllStaffByRole("Physician");
@@ -55,23 +56,25 @@ export class AddScheduleComponent implements OnInit {
   }
   
   get registerFormControl() {
-    return this.addSchedule.controls;
+    return this.form.controls;
   }
 
   save(){
-    this.appointment=new Appointment(this.todayString,this.addSchedule.controls.time.value,this.addSchedule.controls.patient.value
-      ,this.addSchedule.controls.description.value,this.addSchedule.controls.employee.value);
+    this.appointment=new Appointment(this.todayString,this.form.controls.time.value,this.form.controls.patient.value
+      ,this.form.controls.description.value,this.form.controls.employee.value);
     this.scheduleService.createAppointment(this.appointment).subscribe((data) => {
-      this.router.navigateByUrl('/user');
+      
      });
-    /*if(this.addSchedule.valid){
+    
+    if(this.form.valid){
+      
     alert('Appointment Added Successfully');
-    this.router.navigateByUrl('/user/patientmodify');
+    //this.router.navigateByUrl('/user/modifyappointment');
     }
     else{
       alert('Please Fill All The Fields')
-    }*/
-    this.router.navigateByUrl('/user/patientmodify');
+    }
+    this.router.navigateByUrl('/user/modifyappointment');
   }
 
   showPhysicianId(event: any){

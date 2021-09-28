@@ -3,21 +3,12 @@
 <div>
   <h1>Add Appointment Schedule</h1>
 </div>
-<form [formGroup]="addSchedule" (ngSubmit)="save()">
+<form [formGroup]="form" (ngSubmit)="save()">
   <div class="add">
     <div>
       <mat-form-field appearance="fill">
         <mat-label>Physician Name</mat-label>
         <mat-select formControlName="employee" (selectionChange)="showPhysicianId($event.value)">
-          <!-- <span
-            class="text-danger"
-            *ngIf="
-              (submitted) &&
-              registerFormControl.physicianName.errors?.required
-            "
-          >
-            “Last name cannot be empty.”
-          </span> -->
           <mat-option
             *ngFor="let data of listOfPhysician"
             [value]="data"
@@ -61,17 +52,7 @@
       <mat-form-field appearance="fill">
         <mat-label>Appointment Time Slot</mat-label>
         <mat-select formControlName="time"
-        >
-          <!-- <span
-            class="text-danger"
-            *ngIf="
-              (registerFormControl.timeSlot.touched || submitted) &&
-              registerFormControl.timeSlot.errors?.required
-            "
-          >
-            “Last name cannot be empty.”
-          </span> -->
-          <mat-option *ngFor="let data of listOfTimeSlot" [value]="data">{{
+        ><mat-option *ngFor="let data of listOfTimeSlot" [value]="data">{{
             data
           }}</mat-option>
         </mat-select>
@@ -131,7 +112,7 @@
       </div>
 
       <div>
-        <button mat-raised-button color="primary">Save</button>
+        <button mat-raised-button color="primary" [disabled]="false">Save</button>
       </div>
     </div>
   </div>
