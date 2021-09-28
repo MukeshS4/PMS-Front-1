@@ -34,6 +34,10 @@ export class LoginComponent implements OnInit {
       username: this.loginForm.controls.emailId.value,
       password: this.loginForm.controls.password.value,
     }
+    if(loginData.password==='Password123'){
+      this.router.navigate(['/auth/change-password']);
+    }
+    else{
     this.authService.authenticate(loginData.username, loginData.password).subscribe(
       data=>{
         this.loginFailedCount=0;
@@ -51,6 +55,7 @@ export class LoginComponent implements OnInit {
         this.loginFailedCount = this.loginFailedCount + 1;
       }
     );
+    }
     if(this.loginFailedCount>3){
       this.authService.lockAccount(loginData.username).subscribe(
         data=>{

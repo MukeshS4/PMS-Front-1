@@ -5,7 +5,7 @@ import { AppModule } from "src/app/app.module";
 
 @Injectable({ providedIn: 'root' })
 export class AdminService {
-    
+
     pmsStatus = 'pmsStatus/'
     pmsGetService = 'pmsGet/';
     pmsDeleteService = 'pmsDelete/';
@@ -24,7 +24,7 @@ export class AdminService {
                 console.log("Registration Completed - API hit success:", resData);
                 return resData;
             })
-        )
+            )
     }
 
     getAllUsers() {
@@ -35,6 +35,14 @@ export class AdminService {
         }))
     }
 
+    getEmpId() {
+        const url = 'getEmployeeId';
+        return this.http.get(this.config.resourceUrl + this.pmsGetService + url).pipe(tap((empIdData: any) => {
+            // console.log("Unique Available EmployeeId", empIdData);
+            return empIdData;
+        }));
+    }
+
     deleUser(emailId: string) {
         const url = 'deleteUser';
         return this.http.post(this.config.resourceUrl + this.pmsDeleteService + url, emailId)
@@ -42,44 +50,44 @@ export class AdminService {
                 console.log("Deletion Completed - API hit success:", resData);
                 return resData;
             })
-        )
-      }
+            )
+    }
 
-      activate(emailId: string) {
+    activate(emailId: string) {
         const url = 'activateAccount';
         return this.http.post<any>(this.config.resourceUrl + this.pmsStatus + url, emailId).pipe(
-            map(userData=>{
+            map(userData => {
                 console.log(userData);
                 return userData;
             })
         );
-      }
-      deActivate(emailId: string) {
+    }
+    deActivate(emailId: string) {
         const url = 'deactivateAccount';
         return this.http.post<any>(this.config.resourceUrl + this.pmsStatus + url, emailId).pipe(
-            map(userData=>{
+            map(userData => {
                 console.log(userData);
                 return userData;
             })
         );
-      }
+    }
 
-      getAllBlockedUsers() {
+    getAllBlockedUsers() {
         const url = 'getAllBockedUsers';
         return this.http.get(this.config.resourceUrl + this.pmsGetService + url).pipe(tap((usersData: any) => {
             console.log("BlockedUsersData - API hit Success", usersData);
             return usersData;
         }))
-      }
+    }
 
-      unBlockUser(emailId: string) {
+    unBlockUser(emailId: string) {
         const url = 'unLockAccount';
         return this.http.post<any>(this.config.resourceUrl + this.pmsLock + url, emailId).pipe(
-            map(userData=>{
+            map(userData => {
                 console.log(userData);
                 return userData;
             })
         );
-      }
+    }
 
 }
