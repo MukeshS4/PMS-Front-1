@@ -8,7 +8,7 @@ import { sideNavigationItem } from '../../data/navigation.data';
 })
 export class HeaderComponent implements OnInit {
   constructor() { }
-
+  userName: any;
   display!: boolean;
   useritems!: MenuItem[];
   headerItems!: MenuItem[];
@@ -16,6 +16,7 @@ export class HeaderComponent implements OnInit {
   @Input() navigationitems: any;
   ngOnInit() {
     //make a menuitem for notification as below
+    this.userName = localStorage.getItem('username');
     this.useritems = [
       {
         label: 'Agastin Raj',
