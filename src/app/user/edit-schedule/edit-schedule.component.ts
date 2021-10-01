@@ -16,6 +16,7 @@ import { ScheduleService } from '../add-schedule/schedule.service';
 export class EditScheduleComponent implements OnInit {
 
   userSideNavigationdata : SideNavigationItem[] = userSideNavigationItem;
+  appointmentDate: Date = new Date();
   appointmentId:number=0;
   todayNumber: number = Date.now();
   todayDate : Date = new Date();
@@ -50,9 +51,14 @@ export class EditScheduleComponent implements OnInit {
   }
   
   appointmentDateSelectEvent(event: MatDatepickerInputEvent<Date>) {
-    this.todayDate=event.target.value as Date;
-    this.todayString=formatDate(this.todayDate,'dd/MM/yyyy','en-US');
-    this.listOfTimeSlot=this.appointmentService.getAllAvailableSlot(this.todayString);      
+    this.appointmentDate=event.target.value as Date;
+    if(this.appointmentDate.getDay()==0){
+      alert("Appointment can't be scheduled on this day");
+      this.listOfTimeSlot=[];
+    }else{
+    this.todayString=formatDate(this.appointmentDate,'dd/MM/yyyy','en-US');
+    this.listOfTimeSlot=this.appointmentService.getAllAvailableSlot(this.todayString);   
+    }   
   }
   showPhysicianId(event: any){
     this.physicianId=event.employeeId;

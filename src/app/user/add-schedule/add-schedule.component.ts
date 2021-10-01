@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { userSideNavigationItem } from 'src/app/app-common/data/user.navigation.data';
 import { Appointment, Employee, PatientInfo, SideNavigationItem } from 'src/app/app-common/models/navigation.model';
 import { ScheduleService } from './schedule.service';
-import {MatDatepickerInputEvent} from '@angular/material/datepicker';
+import {MatDatepickerInputEvent,MatDatepicker} from '@angular/material/datepicker';
 import {formatDate } from '@angular/common';
 import { Router } from '@angular/router';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
@@ -12,15 +12,19 @@ import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms'
   templateUrl: './add-schedule.component.html',
   styleUrls: ['./add-schedule.component.css']
 })
+
 export class AddScheduleComponent implements OnInit {
 
   userSideNavigationdata : SideNavigationItem[] = userSideNavigationItem;
+
+  
 
   submitted = false;
   //addSchedule!: FormGroup;
 
   form: FormGroup = new FormGroup({});
 
+  appointmentDate: Date = new Date();
   todayNumber: number = Date.now();
   todayDate : Date = new Date();
   todayString : string = new Date().toDateString();
@@ -33,10 +37,15 @@ export class AddScheduleComponent implements OnInit {
   appointment:Appointment | undefined;
 
   appointmentDateSelectEvent(event: MatDatepickerInputEvent<Date>) {
-    this.todayDate=event.target.value as Date;
-    this.todayString=formatDate(this.todayDate,'dd/MM/yyyy','en-US');
-    this.listOfTimeSlot=this.scheduleService.getAllAvailableSlot(this.todayString);
     
+    this.appointmentDate=event.target.value as Date;
+    if(this.appointmentDate.getDay()==0){
+      alert("Appointment can't be scheduled for this day");
+      this.listOfTimeSlot=[];
+    }else{
+    this.todayString=formatDate(this.appointmentDate,'dd/MM/yyyy','en-US');
+    this.listOfTimeSlot=this.scheduleService.getAllAvailableSlot(this.todayString);
+    }
   } 
   constructor(private scheduleService:ScheduleService,
     private router: Router, private formBuilder: FormBuilder
@@ -84,4 +93,5 @@ export class AddScheduleComponent implements OnInit {
   showPatientName(event: any){
     this.patientName=event.name;
   }
+
 }

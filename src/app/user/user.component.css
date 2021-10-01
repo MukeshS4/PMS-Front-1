@@ -1,0 +1,29 @@
+
+.ph-card{
+    width: 40%;
+}
+.ua-card{
+    width: 15%;
+    background-color: #80b3ff;
+}
+.ca-card{
+    width: 15%;
+    background-color: #c2d6d6;
+}
+
+mat-card{
+    margin-left: 7%;
+    margin-top: 3%;
+}
+
+ .chart-card{
+     width: 40%;
+     height: 80%;
+     margin-left: 30%;
+ }
+
+ .notes-card{
+     width: 30%;
+     height: 60%;
+     margin-top: 5%;
+ }

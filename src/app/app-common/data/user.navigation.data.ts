@@ -4,7 +4,7 @@ export const userSideNavigationItem: SideNavigationItem[] = [
     {
         icon: 'pi pi-fw pi-th-large',
         label: 'Dashboard',
-        routerLink: '/user/inbox',
+        routerLink: '/user',
     },
     {
         icon: 'pi pi-fw pi-inbox',

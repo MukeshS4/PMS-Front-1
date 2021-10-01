@@ -1,11 +1,11 @@
 <app-header [navigationitems]="userSideNavigationdata"></app-header>
 
-<div>
-  <h1>Modify Appointment Schedule</h1>
-</div>
 <form action="fill" [formGroup]="form" (ngSubmit)="updateAppointment()">
 <div class="add" >
   <div class="form">
+    <div>
+      <h1>MODIFY APPOINTMENT SCHEDULE</h1>
+    </div>
     <div>
       <mat-form-field appearance="fill">
         <mat-label>Appointment Id</mat-label>
@@ -93,9 +93,6 @@
           <textarea matInput value={{appointment.description}} formControlName="description"></textarea>
         </mat-form-field>
       </div>
-    </div>
-    <div>
-      {{ todayDate | date: "medium" }}
     </div>
 
     <div>

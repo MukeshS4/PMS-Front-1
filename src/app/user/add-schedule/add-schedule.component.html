@@ -26,27 +26,11 @@
     <div>
       <mat-form-field appearance="fill">
         <mat-label>Date</mat-label>
-        <mat-select formCotrolname=date
-      >
-        <!-- <span
-          class="text-danger"
-          *ngIf="
-            (registerFormControl.date.touched || submitted) &&
-            registerFormControl.date.errors?.required
-          "
-        >
-          “Last name cannot be empty.”
-        </span> -->
-      </mat-select>
-        <input
-          matInput
-          [matDatepicker]="picker"
-          [min]="todayDate"
-          (dateInput)="appointmentDateSelectEvent($event)"
-        />
-        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-        <mat-datepicker #picker></mat-datepicker>
-      </mat-form-field>
+      <input matInput [matDatepicker]="picker" [min]="todayDate"
+      placeholder="Choose a date" (dateInput)="appointmentDateSelectEvent($event)">
+      <mat-datepicker-toggle matSuffix [for]="picker" ></mat-datepicker-toggle>
+      <mat-datepicker #picker></mat-datepicker>
+    </mat-form-field>
     </div>
     <div>
       <mat-form-field appearance="fill">
@@ -106,9 +90,6 @@
             
           </mat-form-field>
         </div>
-      </div>
-      <div>
-        {{ todayDate | date: "medium" }}
       </div>
 
       <div>

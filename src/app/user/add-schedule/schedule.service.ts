@@ -2,6 +2,7 @@ import { HttpClient,HttpHeaders,HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Appointment, Employee, PatientInfo } from 'src/app/app-common/models';
 import { Observable } from 'rxjs';
+import { filter } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -13,6 +14,8 @@ private appoinmentUrl="http://localhost:8080/user/appointment";
 listOfStaff:Employee[]=[];
 listOfPatient:PatientInfo[]=[];
 listOfTimeSlot:string[]=[];
+
+
   constructor(private http:HttpClient) { }
 
 // Http Options
