@@ -37,6 +37,7 @@ import {DialogModule} from 'primeng/dialog';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatIconModule } from "@angular/material/icon";
 import { ChartsModule } from 'ng2-charts';
+import { FullCalendarModule } from '@fullcalendar/angular';
 
 @NgModule({
   declarations: [
@@ -78,7 +79,8 @@ import { ChartsModule } from 'ng2-charts';
     ReactiveFormsModule,
     MatCardModule,
     MatIconModule,
-    ChartsModule
+    ChartsModule,
+    FullCalendarModule
 
   ]
 

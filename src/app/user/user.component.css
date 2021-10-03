@@ -1,29 +1,37 @@
+#dashboard{
+    display:flex; flex-direction: row;
+    background-color: antiquewhite;
+    
+}
+#detail{
+    display:flex; flex-direction: column; margin-left: 1%;
+}
+.physician-card{
+    margin-top: 2%;
+}
+.today-card{
+    margin-left: 3%; height: 80%;
+    background-color: aqua;
+}
+#today{
+    font-size: 340%; margin-top: 8%; text-align: center;
+}
 
-.ph-card{
-    width: 40%;
-}
-.ua-card{
-    width: 15%;
-    background-color: #80b3ff;
-}
-.ca-card{
-    width: 15%;
-    background-color: #c2d6d6;
-}
+.chart-card{
+    height: 50%; margin-bottom: 1%;
 
-mat-card{
-    margin-left: 7%;
-    margin-top: 3%;
-}
-
- .chart-card{
-     width: 40%;
-     height: 80%;
-     margin-left: 30%;
  }
-
- .notes-card{
-     width: 30%;
-     height: 60%;
-     margin-top: 5%;
- }
+.calendar{
+    width: 245%; margin-top: 1%; margin-left: 1%;
+    margin-right: 1%; margin-bottom: 1%;
+}
+.total-card{
+    margin-left: 5%; height: 80%;
+    background-color: aquamarine;
+}
+#total{
+    font-size: 340%; margin-top: 8%; text-align: center;
+}
+#appointment{
+    display:flex; flex-direction: row; margin-top: 2%;
+}
