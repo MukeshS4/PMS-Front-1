@@ -1,4 +1,4 @@
-import { HttpClient, HttpParams } from "@angular/common/http";
+import { HttpClient, HttpHeaders, HttpParams } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { map, tap } from "rxjs/operators";
 import { AppModule } from "src/app/app.module";
@@ -29,6 +29,10 @@ export class AdminService {
 
     getAllUsers() {
         const url = 'getAllUsers';
+        // const token=localStorage.getItem('token');
+        // console.log(token);
+        // const headers = new HttpHeaders({Authorization: ''+token});
+        // console.log(headers);
         return this.http.get(this.config.resourceUrl + this.pmsGetService + url).pipe(tap((usersData: any) => {
             console.log("UsersData - API hit Success", usersData);
             return usersData;

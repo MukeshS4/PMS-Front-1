@@ -9,6 +9,8 @@ import { AdminService } from '../service/admin.service';
   styleUrls: ['./add-user.component.css']
 })
 export class AddUserComponent implements OnInit {
+  isAdmin = false;
+  invalidEmailAddress = false;
   isLoading = false;
   idUnavailable = false;
   prepopEmpId = [''];
@@ -71,15 +73,25 @@ export class AddUserComponent implements OnInit {
           this.isLoading = false;
         }
       }, error => {
+        console.log(error);
         if (error.error.message === "User is already Registered") {
           this.userExistModal = true;
           this.isLoading = false;
           this.userRegisterForm.reset();
-        } else {
+        } else if (error.error.message === "Provided Email Id in incorrect or invalid") {
+          this.invalidEmailAddress = true;
+          this.isLoading = false;
+          this.userRegisterForm.reset();
+        }
+        else if (error.error.message === "Only a single admin can persist") {
+          this.isAdmin = true;
+          this.isLoading = false;
+          this.userRegisterForm.reset();
+        }
+        else {
           this.errorModal = true;
           this.isLoading = false;
         }
-
       }
     );
   }

@@ -105,4 +105,7 @@
 <p-dialog header="Failed" [(visible)]="userExistModal"  [style]="{width: '30vw'}" [baseZIndex]="10000">
     <i class="pi pi-thumbs-down"></i> User Already Exist!
 </p-dialog>
+<p-dialog header="Failed" [(visible)]="isAdmin"  [style]="{width: '30vw'}" [baseZIndex]="10000">
+    <i class="pi pi-thumbs-down"></i>Only 1 Admin can persist 
+</p-dialog>
 <app-footer></app-footer>
