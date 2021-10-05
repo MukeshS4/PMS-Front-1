@@ -8,6 +8,7 @@ import { AppComponent } from './app.component';
 import { AuthModule } from './auth/auth.module';
 import { AuthService } from './auth/service/auth.service';
 import { AuthHttpInterceptor } from './auth/service/auth.interceptor';
+import { AuthGaurdService } from './auth/service/auth.guard.service';
 
 @NgModule({
   declarations: [
@@ -21,7 +22,9 @@ import { AuthHttpInterceptor } from './auth/service/auth.interceptor';
     HttpClientModule,
     AppRoutingModule
   ],
-  providers: [{
+  providers: [
+    AuthGaurdService,
+    {
     provide:HTTP_INTERCEPTORS, useClass:AuthHttpInterceptor, multi:true 
   },
     AuthService],
