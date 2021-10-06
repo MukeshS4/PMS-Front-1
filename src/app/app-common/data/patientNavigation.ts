@@ -3,7 +3,7 @@ import { SideNavigationItem, SideNavigationItems, HeaderItem, SideNavigationSect
 export const patientSideNavigationItem: SideNavigationItem[] = [
     {
         icon: 'pi pi-fw pi-th-large',
-        label: 'Patient Details',
+        label: 'Patient Registration',
         routerLink: '/patient',
     },
     
@@ -15,6 +15,16 @@ export const patientSideNavigationItem: SideNavigationItem[] = [
     {
         icon:'pi pi-fw pi-info-circle',
         label: 'Schedule Meeting',
-        routerLink: '/user/schedule',
+        routerLink: '/patient/patient-meeting',
+    },
+    {
+        icon:'pi pi-fw pi-info-circle',
+        label: 'Patient Details',
+        routerLink: '/patient/patient-details/',
+    },
+    {
+        icon:'pi pi-fw pi-info-circle',
+        label: 'Dashboard',
+        routerLink: '/patient/home-page/',
     }
 ]

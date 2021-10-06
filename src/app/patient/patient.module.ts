@@ -8,13 +8,15 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { PatientVisitComponent } from './patient-visit/patient-visit.component';
 import { HttpClientModule } from '@angular/common/http';
 import { ScheduleMeetingComponent } from './schedule-meeting/schedule-meeting.component';
+import { PatientDetailsComponent } from './patient-details/patient-details.component';
 
 
 @NgModule({
   declarations: [
     PatientComponent,
     PatientVisitComponent,
-    ScheduleMeetingComponent
+    ScheduleMeetingComponent,
+    PatientDetailsComponent
   ],
   imports: [
     CommonModule,

@@ -8,6 +8,7 @@ import {
 import { ActivatedRoute, Router } from '@angular/router';
 import { patientSideNavigationItem } from '../app-common/data/patientNavigation';
 import { SideNavigationItem } from '../app-common/models';
+import { AppModule } from '../app.module';
 import { CustomvalidationService } from './customvalidation.service';
 import { PatientService } from './patient.service';
 
@@ -17,16 +18,23 @@ import { PatientService } from './patient.service';
   styleUrls: ['./patient.component.css'],
 })
 export class PatientComponent implements OnInit {
+  formScreen =true;
+  detailsScreen = false;
+  patientId:any;
   sideNavigationdata: SideNavigationItem[] = patientSideNavigationItem;
   PdetailsForm!: FormGroup;
   EmergencyForm!: FormGroup;
+  pmsDetailsService = 'pmsDetails/';
   // model: NgbDateStruct;
   submitted = false;
+  age: any;
+  showAge!: number;
   constructor(
     private fb: FormBuilder,
     private customValidator: CustomvalidationService,
     private patientService: PatientService,
-    private router: Router
+    private router: Router,
+    private config: AppModule
   ) {
     // customize default values of datepickers used by this component tree
     // config.minDate = {year: 1900, month: 1, day: 1};
@@ -164,7 +172,7 @@ export class PatientComponent implements OnInit {
         age: this.PdetailsForm.controls.age.value,
         gender: this.PdetailsForm.controls.gender.value,
         race: this.PdetailsForm.controls.race.value,
-        ethnicity: this.PdetailsForm.controls.ethnicity.value,
+        ethinicity: this.PdetailsForm.controls.ethnicity.value,
         language: this.PdetailsForm.controls.languages.value,
         email: this.PdetailsForm.controls.emailId.value,
         home_address: this.PdetailsForm.controls.address.value,
@@ -190,14 +198,26 @@ export class PatientComponent implements OnInit {
         allergyc: this.PdetailsForm.controls.allergyc.value,
       },
     };
+    this.submitted=true;
     console.log(RegisterData);
-    alert("Data saved successfully");
+
+    // if(this.PdetailsForm.valid){
+
     this.patientService.patientDetails(RegisterData).subscribe((data) => {
       console.log(data);
+      this.patientId=data.id;
+
+      alert("Data saved successfully");
+      this.detailsScreen=true;
+      this.formScreen=false;
+     // const url='patientDetails/'
+      // /this.router.navigateByUrl(this.config.resourceUrl + this.pmsDetailsService + url+data.id)
+      //this.router.navigate(['/patient-details/'+data.id]);
       // if (data  !== null) {
       //   this.router.navigate(['']);
       // }
     });
+  //}
   }
   status: boolean = false;
   clickEvent() {
@@ -205,5 +225,15 @@ export class PatientComponent implements OnInit {
   }
   clickEvent1() {
     this.status = true;
+  }
+  ageCalculator() {
+    console.log(' ageCalculator function called');
+    console.log(this.age);
+    if (this.age) {
+      const convertAge = new Date(this.age);
+      const timeDiff = Math.abs(Date.now() - convertAge.getTime());
+      this.showAge = Math.floor(timeDiff / (1000 * 3600 * 24) / 365);
+      console.log('age is ' + this.showAge);
+    }
   }
 }

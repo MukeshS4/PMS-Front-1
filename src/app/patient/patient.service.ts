@@ -7,7 +7,8 @@ import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { AppModule } from '../app.module';
 import { catchError, tap } from 'rxjs/operators';
-import { throwError } from 'rxjs';
+import { Observable, throwError } from 'rxjs';
+import { demographies } from './patient-details';
 
 @Injectable({ providedIn: 'root' })
 export class PatientService {
@@ -46,7 +47,7 @@ export class PatientService {
       age: any;
       gender: any;
       race: any;
-      ethnicity: any;
+      ethinicity: any;
       language: any;
       email: any;
       home_address: any;
@@ -86,5 +87,17 @@ export class PatientService {
           console.log('Registration Completed - API hit success:', resData);
         })
       );
-  }
+
+
+    }
+
+    getAll(id:any): Observable<demographies[]>
+    {
+      console.log("/slot?id="+id);
+      const url='patientDetails/';
+      
+      return this.http.get<demographies[]>(  this.config.resourceUrl + this.pmsDetailsService + url+id).pipe(
+        catchError(this.customErrorHandler)
+      )
+    }
 }

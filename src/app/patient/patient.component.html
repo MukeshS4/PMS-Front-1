@@ -4,6 +4,7 @@
   
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
   <title>Document</title>
 </head>
 <body>
@@ -19,7 +20,7 @@
       <div class="justify-content-center pt-2"><h4 style="padding-top: 5px;"> CT General Hospital </h4></div>
     </div>
   </nav> -->
-  <div class="container d-flex justify-content-center mt-5 mb-5">
+  <div *ngIf="formScreen" class="container d-flex justify-content-center mt-5 mb-5">
     <div class="card ">
         <div class="card-header text-center h4">
             Patient Details
@@ -81,7 +82,8 @@
   
                     <div class="form-group">
                         <div class="input-group">
-                            <input class="form-control" placeholder="yyyy-mm-dd" name="dateOfBirth" id="dateOfBirth" formControlName="dateOfBirth" type="date">
+                            <input class="form-control" placeholder="yyyy-mm-dd" name="dateOfBirth" id="dateOfBirth" formControlName="dateOfBirth" type="date" 
+                            (click)='ageCalculator()'>
                             <!-- <div class="input-group-append">
                                 <button class="btn btn-outline-secondary calendar" style="height: 38px;"
                                      type="button"></button>
@@ -837,6 +839,6 @@
   
     </div>
   </div>
-  
+  <app-patient-details *ngIf="detailsScreen" [id]="patientId"></app-patient-details>
 </body>
 </html>

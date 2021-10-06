@@ -7,8 +7,12 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { AuthModule } from './auth/auth.module';
 import { AuthService } from './auth/service/auth.service';
+import { PatientService } from './patient/patient.service';
+import { PatientVisitService } from './patient/patient-visit/patientvisit.service';
+import { ScheduleService } from './user/add-schedule/schedule.service';
 import { AuthHttpInterceptor } from './auth/service/auth.interceptor';
 import { AuthGaurdService } from './auth/service/auth.guard.service';
+
 
 @NgModule({
   declarations: [
@@ -24,6 +28,9 @@ import { AuthGaurdService } from './auth/service/auth.guard.service';
   ],
   providers: [
     AuthGaurdService,
+    PatientService,
+    PatientVisitService,
+    ScheduleService
     {
     provide:HTTP_INTERCEPTORS, useClass:AuthHttpInterceptor, multi:true 
   },

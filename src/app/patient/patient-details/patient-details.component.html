@@ -1,0 +1,29 @@
+<div class="container">
+    <div *ngFor="let post of posts">
+        <h4>Patient Details</h4><br/>
+        <p>Name = <span>{{ post.demographies.title }} {{ post.demographies.first_name }} {{ post.demographies.last_name }}</span></p>
+
+        <p>Date of Birth = <span>{{ post.demographies.date_of_birth }}</span></p>
+        <p>Age = <span>{{ post.demographies.age }}</span></p>
+        <p>Gender = <span>{{ post.demographies.gender }}</span></p>
+        <p>Race = <span>{{ post.demographies.race }}</span></p>
+        <p>Ethinicity = <span>{{ post.demographies.ethinicity }}</span></p>
+        <p>Languages Known = <span>{{ post.demographies.language }}</span></p>
+        <p>Email Id = <span>{{ post.demographies.email}}</span></p>
+        <p>Home Address = <span>{{ post.demographies.home_address}}</span></p>
+        <p>Phone Number = <span>{{ post.demographies.contact_number}}</span></p>
+
+        <h6>Emergency Contact Details:</h6>
+       <p>Emergency First Name= <span>{{ post.demographies.emergency_contact_details.e_first_name}}</span></p>
+          <p>Emergency Last Name= <span>{{ post.demographies.emergency_contact_details.e_last_name}}</span></p>
+        <p>Emergency Relationship= <span>{{ post.demographies.emergency_contact_details.relationship}}</span></p>
+        <p>Emergency Email= <span>{{ post.demographies.emergency_contact_details.email_address}}</span></p>
+        <p>Emergency PhNO= <span>{{ post.demographies.emergency_contact_details.contact}}</span></p>
+        <p>Emergency Address= <span>{{ post.demographies.emergency_contact_details.address}}</span></p>
+        <h6>Allergy Details</h6>
+        <p>Allergy Id = <span>{{ post.allergies.allergyid}}</span></p> 
+        <p>Allergy Name = <span>{{ post.allergies.allergyname}}</span> </p>
+        <p>Allergy Type = <span>{{ post.allergies.type}}</span></p>
+        <p>Allergy Description = <span>{{post.allergies.allergydescription}}</span></p>
+    </div>
+</div>
