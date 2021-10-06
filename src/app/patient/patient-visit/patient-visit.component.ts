@@ -82,13 +82,17 @@ export class PatientVisitComponent implements OnInit {
       },
     };
     console.log(RegisterData);
+    this.submitted=true;
+    if(this.PvisitForm.valid){
     this.patientVisitSerice
       .patientVisitDetails(RegisterData)
       .subscribe((data) => {
         console.log(data);
+        alert("Data saved successfully");
         // if (data  !== null) {
         //   this.router.navigate(['']);
         // }
       });
+    }
   }
 }

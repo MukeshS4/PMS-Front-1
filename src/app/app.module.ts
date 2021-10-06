@@ -7,6 +7,9 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { AuthModule } from './auth/auth.module';
 import { AuthService } from './auth/service/auth.service';
+import { PatientService } from './patient/patient.service';
+import { PatientVisitService } from './patient/patient-visit/patientvisit.service';
+import { ScheduleService } from './user/add-schedule/schedule.service';
 
 @NgModule({
   declarations: [
@@ -20,7 +23,7 @@ import { AuthService } from './auth/service/auth.service';
     HttpClientModule,
     AppRoutingModule
   ],
-  providers: [AuthService],
+  providers: [AuthService,PatientService,PatientVisitService,ScheduleService],
   bootstrap: [AppComponent]
 })
 export class AppModule {
