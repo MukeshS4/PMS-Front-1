@@ -55,7 +55,7 @@ export class AuthService {
                     let tokenStr = 'Bearer ' + userData.accessToken;
                     localStorage.setItem('token', tokenStr);
                     localStorage.setItem('expirationDuration', userData.expirationDuration);
-                    this.autoLogout(userData.expirationDuration);
+                    this.autoLogout(userData.expirationDuration );
                     return userData;
                     }
                     else{
@@ -97,8 +97,9 @@ export class AuthService {
         console.log("Auto - logout called")
         this.tokenTimeOut = setTimeout(() => {
             this.logout();
+            console.log("token expired");
         }, expirationDuration * 1000);
-        console.log("token expired")
+       
     }
 
     //logout function which removes local storage data which was made in login function

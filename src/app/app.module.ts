@@ -10,6 +10,9 @@ import { AuthService } from './auth/service/auth.service';
 import { PatientService } from './patient/patient.service';
 import { PatientVisitService } from './patient/patient-visit/patientvisit.service';
 import { ScheduleService } from './user/add-schedule/schedule.service';
+import { AuthHttpInterceptor } from './auth/service/auth.interceptor';
+import { AuthGaurdService } from './auth/service/auth.guard.service';
+
 
 @NgModule({
   declarations: [
@@ -23,7 +26,15 @@ import { ScheduleService } from './user/add-schedule/schedule.service';
     HttpClientModule,
     AppRoutingModule
   ],
-  providers: [AuthService,PatientService,PatientVisitService,ScheduleService],
+  providers: [
+    AuthGaurdService,
+    PatientService,
+    PatientVisitService,
+    ScheduleService
+    {
+    provide:HTTP_INTERCEPTORS, useClass:AuthHttpInterceptor, multi:true 
+  },
+    AuthService],
   bootstrap: [AppComponent]
 })
 export class AppModule {
