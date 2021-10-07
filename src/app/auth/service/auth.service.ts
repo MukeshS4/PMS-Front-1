@@ -55,6 +55,7 @@ export class AuthService {
                     let tokenStr = 'Bearer ' + userData.accessToken;
                     localStorage.setItem('token', tokenStr);
                     localStorage.setItem('expirationDuration', userData.expirationDuration);
+                    localStorage.setItem('role',userData.role);
                     this.autoLogout(userData.expirationDuration );
                     return userData;
                     }

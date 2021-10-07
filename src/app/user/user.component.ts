@@ -8,6 +8,7 @@ import { Label } from 'ng2-charts';
 import { CalendarOptions, FullCalendarModule } from '@fullcalendar/angular';
 import dayGridPlugin from '@fullcalendar/daygrid'; // a plugin!
 import interactionPlugin from '@fullcalendar/interaction'; 
+import { PatientModifyService } from './patient-modify.service';
 
 FullCalendarModule.registerPlugins([ 
   dayGridPlugin,
@@ -23,10 +24,10 @@ export class UserComponent implements OnInit {
 
   userSideNavigationdata : SideNavigationItem[] = userSideNavigationItem;
 
-  // calendarOptions: CalendarOptions = {
-  //   initialView: 'dayGridMonth',
-  //  firstSelectDay: monday,
-  // };
+  physicianFlag=false;
+  username:any;
+  emailId:any;
+  apiChartData:number[]=[];
 
   handleDateClick(arg: { dateStr: string; }) {
     alert('date click! ' + arg.dateStr)
@@ -91,17 +92,49 @@ export class UserComponent implements OnInit {
   public chart_Type: ChartType = 'pie';
   public chart_Legend = true;
   public chart_Plugins = [];
-
-  public chart_Data: ChartDataSets[] = [
+  public chart_Data: ChartDataSets[] = [];
+  public donutColors=[
     {
-      data: [5, 44, 18, 104]
+      backgroundColor: [
+          'rgba(92, 184, 92,1)',
+          'rgba(255, 195, 0, 1)',
+          'rgba(217, 83, 79,1)',
+          'rgba(129, 78, 40, 1)',
+    ]
     }
   ];
+
   
-  constructor(private route: Router) { 
+  
+  constructor(private route: Router,private appointmentService:PatientModifyService) { 
   }
 
   ngOnInit(): void {
-
+    this.username=localStorage.getItem('username');
+    this.emailId=localStorage.getItem('emailId');
+    if(localStorage.getItem('role')=='Physician'){
+      this.physicianFlag=true;
+      this.appointmentService.getAppointmentStatsByEmpId(this.emailId).subscribe((stat)=>{
+        this.apiChartData.slice(0,this.apiChartData.length);
+        this.apiChartData.push(...stat);
+      });
+      this.chart_Data=[
+        {
+        data: this.apiChartData
+      }
+      ]
+    }
+    else
+    {
+      this.appointmentService.getAllAppointmentStats().subscribe((stat)=>{
+        this.apiChartData.slice(0,this.apiChartData.length);
+        this.apiChartData.push(...stat);
+      });
+      this.chart_Data=[
+        {
+        data: this.apiChartData
+      }
+      ]
+    }
  }
 }

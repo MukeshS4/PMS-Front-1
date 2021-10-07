@@ -28,9 +28,12 @@ export class EditScheduleComponent implements OnInit {
   listOfPhysician:Employee[]=[];
   physicianId:string="";
   form: FormGroup = new FormGroup({});
+  emailId:any;
   
 
-  constructor(private router:Router,private route:ActivatedRoute,private appointmentService:PatientModifyService,private userService:ScheduleService) { }
+  constructor(private router:Router,private route:ActivatedRoute,
+    private appointmentService:PatientModifyService,
+    private userService:ScheduleService) { }
 
   ngOnInit() {
     console.log("in edit schedule");
@@ -41,7 +44,17 @@ export class EditScheduleComponent implements OnInit {
     this.appointmentService.getAppointmentById(this.appointmentId).subscribe((data:UserPatientModify)=>{
       this.appointment=data;
     });
-    this.listOfPhysician=this.userService.getAllStaffByRole("Physician");
+    if(localStorage.getItem('role')=='Physician')
+    {
+      this.emailId=localStorage.getItem('emailId');
+      this.userService.findStaffByEmailId(this.emailId).subscribe(data=>{
+        this.listOfPhysician.splice(0,this.listOfPhysician.length);
+      this.listOfPhysician.push(data);
+      });
+    }
+    else{
+      this.listOfPhysician=this.userService.getAllStaffByRole("Physician");
+    }
     this.form = new FormGroup({
       patient: new FormControl(null, [Validators.required]),
       employee: new FormControl(null, [Validators.required]),
@@ -57,7 +70,7 @@ export class EditScheduleComponent implements OnInit {
       this.listOfTimeSlot=[];
     }else{
     this.todayString=formatDate(this.appointmentDate,'dd/MM/yyyy','en-US');
-    this.listOfTimeSlot=this.appointmentService.getAllAvailableSlot(this.todayString);   
+    this.listOfTimeSlot=this.appointmentService.getAllAvailableSlot(this.todayString,this.form.controls.employee.value.employeeId);   
     }   
   }
   showPhysicianId(event: any){

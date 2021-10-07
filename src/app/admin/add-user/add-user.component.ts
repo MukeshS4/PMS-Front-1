@@ -47,6 +47,7 @@ export class AddUserComponent implements OnInit {
     this.adminService.getEmpId().subscribe(
       data => {
         if (data !== null) {
+          console.log(data);
           this.prepopEmpId = data;
         }
       }, error => {

@@ -52,7 +52,7 @@ export class LoginComponent implements OnInit {
             if (data.role === "Admin") {
               this.router.navigate(['/admin']);
             }
-            else if (data.role === "Physician" || data.role === "Nurse") {
+            else if (data.role === "Physician" || data.role === "Nurse" || data.role === "physician") {
               this.router.navigate(['/user']);
             }
             else {

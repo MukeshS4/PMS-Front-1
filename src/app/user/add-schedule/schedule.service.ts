@@ -2,7 +2,7 @@ import { HttpClient,HttpHeaders,HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Appointment, Employee, PatientInfo } from 'src/app/app-common/models';
 import { Observable } from 'rxjs';
-import { filter } from 'rxjs/operators';
+import { filter, tap } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -26,11 +26,17 @@ httpOptions = {
 }
 
 findAllStaffByRole(role:string):void{
-  this.http.get<Employee[]>(this.apiUrl+"/role/${role}")
+  this.http.get<Employee[]>(this.apiUrl+"/role/"+role)
   .subscribe((employee)=>{
     this.listOfStaff.splice(0,this.listOfStaff.length);
     this.listOfStaff.push(...employee);
   })
+}
+
+findStaffByEmailId(emailId:any){
+ return this.http.get<Employee>(this.apiUrl+"/"+emailId).pipe(tap((resData: any) => {
+    return resData;
+}));
 }
 
 getAllStaffByRole(role:string){
@@ -51,17 +57,17 @@ getAllPatient(){
   return this.listOfPatient;
 }
 
-findAllSlotByDate(date:string):void{
+findAllSlotByDate(date:string,empId:string):void{
   //let params = new HttpParams().set('date', date);
-  this.http.get<string[]>(this.appoinmentUrl+"/slot?date="+date)
+  this.http.get<string[]>(this.appoinmentUrl+"/slot?date="+date+"&empId="+empId)
   .subscribe((timeSlot)=>{
     this.listOfTimeSlot.splice(0,this.listOfTimeSlot.length);
     this.listOfTimeSlot.push(...timeSlot);
   })
 }
 
-getAllAvailableSlot(date:string){
-  this.findAllSlotByDate(date);
+getAllAvailableSlot(date:string,empId:string){
+  this.findAllSlotByDate(date,empId);
   return this.listOfTimeSlot;
 }
 

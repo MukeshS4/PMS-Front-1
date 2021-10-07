@@ -30,11 +30,13 @@ export class AddScheduleComponent implements OnInit {
   todayString : string = new Date().toDateString();
   todayISOString : string = new Date().toISOString();
   listOfPhysician:Employee[]=[];
+  listOfPhysician1:string[]=["abc","def","ghi"];
   listOfPatient:PatientInfo[]=[];
   listOfTimeSlot:string[]=[];
   patientName:string="";
   physicianId:string="";
   appointment:Appointment | undefined;
+  emailId:any;
 
   appointmentDateSelectEvent(event: MatDatepickerInputEvent<Date>) {
     
@@ -44,7 +46,7 @@ export class AddScheduleComponent implements OnInit {
       this.listOfTimeSlot=[];
     }else{
     this.todayString=formatDate(this.appointmentDate,'dd/MM/yyyy','en-US');
-    this.listOfTimeSlot=this.scheduleService.getAllAvailableSlot(this.todayString);
+    this.listOfTimeSlot=this.scheduleService.getAllAvailableSlot(this.todayString,this.physicianId);
     }
   } 
   constructor(private scheduleService:ScheduleService,
@@ -60,7 +62,18 @@ export class AddScheduleComponent implements OnInit {
       description: new FormControl(null, [Validators.required])
     });
 
-    this.listOfPhysician=this.scheduleService.getAllStaffByRole("Physician");
+    
+    if(localStorage.getItem('role')=='Physician')
+    {
+      this.emailId=localStorage.getItem('emailId');
+      this.scheduleService.findStaffByEmailId(this.emailId).subscribe(data=>{
+        this.listOfPhysician.splice(0,this.listOfPhysician.length);
+      this.listOfPhysician.push(data);
+      });
+    }
+    else{
+      this.listOfPhysician=this.scheduleService.getAllStaffByRole("Physician");
+    }
     this.listOfPatient=this.scheduleService.getAllPatient();
   }
   
