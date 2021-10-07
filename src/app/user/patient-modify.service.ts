@@ -40,15 +40,15 @@ export class PatientModifyService {
   getAppointmentById(appointmentId:number){
     return this.http.get<UserPatientModify>(this.apiUrl+"/"+appointmentId);
   }
-  findAllSlotByDate(date:string):void{
-    this.http.get<string[]>(this.apiUrl+"/slot?date="+date)
+  findAllSlotByDate(date:string,empId:string):void{
+    this.http.get<string[]>(this.apiUrl+"/slot?date="+date+"&empId="+empId)
     .subscribe((timeSlot)=>{
       this.listOfTimeSlot.splice(0,this.listOfTimeSlot.length);
       this.listOfTimeSlot.push(...timeSlot);
     })
   }
-  getAllAvailableSlot(date:string){
-    this.findAllSlotByDate(date);
+  getAllAvailableSlot(date:string,empId:string){
+    this.findAllSlotByDate(date,empId);
     return this.listOfTimeSlot;
   }
   updateAppointment(appointment: UserPatientModify):Observable<UserPatientModify>{
@@ -56,5 +56,15 @@ export class PatientModifyService {
     }
   cancelAppointment(id:number,reason:string){
     return this.http.delete(this.apiUrl+"/"+id+"?reason="+reason,this.httpOptions);
+  }
+
+  getAppointmentStatsByEmpId(empId:string)
+  {
+    return this.http.get<number[]>(this.apiUrl+"/stats?empId="+empId);
+  }
+
+  getAllAppointmentStats()
+  {
+    return this.http.get<number[]>(this.apiUrl+"/stats")
   }
 }
