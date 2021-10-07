@@ -140,7 +140,7 @@ export class AuthService {
       }
 
     patientRegister(RegisterData: any) {
-        const url = 'register';
+        const url = 'patientRegister';
         const parameters = new HttpParams().set('title', RegisterData.title)
             .set('password', RegisterData.password)
             .set('firstName', RegisterData.firstName)

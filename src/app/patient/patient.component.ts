@@ -11,6 +11,7 @@ import { SideNavigationItem } from '../app-common/models';
 import { AppModule } from '../app.module';
 import { CustomvalidationService } from './customvalidation.service';
 import { PatientService } from './patient.service';
+import * as moment from 'moment';
 
 @Component({
   selector: 'app-patient',
@@ -21,6 +22,7 @@ export class PatientComponent implements OnInit {
   formScreen =true;
   detailsScreen = false;
   patientId:any;
+  dateOfBirth:any;
   sideNavigationdata: SideNavigationItem[] = patientSideNavigationItem;
   PdetailsForm!: FormGroup;
   EmergencyForm!: FormGroup;
@@ -226,14 +228,16 @@ export class PatientComponent implements OnInit {
   clickEvent1() {
     this.status = true;
   }
-  ageCalculator() {
-    console.log(' ageCalculator function called');
+  calculateage(){
+    console.log('dateOfBirth',this.dateOfBirth);
+    var todaysDate  =moment(new Date());
+    var dob = moment(new Date(this.dateOfBirth));
+    console.log(todaysDate);
+    console.log(dob);
+    var duration =moment.duration(todaysDate.diff(dob));
+    console.log(duration);
+    this.age=duration.years();
     console.log(this.age);
-    if (this.age) {
-      const convertAge = new Date(this.age);
-      const timeDiff = Math.abs(Date.now() - convertAge.getTime());
-      this.showAge = Math.floor(timeDiff / (1000 * 3600 * 24) / 365);
-      console.log('age is ' + this.showAge);
-    }
   }
+  
 }
