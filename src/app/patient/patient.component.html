@@ -82,8 +82,8 @@
   
                     <div class="form-group">
                         <div class="input-group">
-                            <input class="form-control" placeholder="yyyy-mm-dd" name="dateOfBirth" id="dateOfBirth" formControlName="dateOfBirth" type="date" 
-                            (click)='ageCalculator()'>
+                            <input class="form-control" placeholder="yyyy-mm-dd" name="dateOfBirth" id="dateOfBirth" [(ngModel)]="dateOfBirth" formControlName="dateOfBirth" type="date" 
+                            (change)='calculateage()'>
                             <!-- <div class="input-group-append">
                                 <button class="btn btn-outline-secondary calendar" style="height: 38px;"
                                      type="button"></button>

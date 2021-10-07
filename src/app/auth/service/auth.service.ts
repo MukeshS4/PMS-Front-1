@@ -140,7 +140,7 @@ export class AuthService {
       }
 
     patientRegister(RegisterData: any) {
-        const url = 'register';
+        const url = 'patientRegister';
         const parameters = new HttpParams().set('title', RegisterData.title)
             .set('password', RegisterData.password)
             .set('firstName', RegisterData.firstName)
@@ -148,6 +148,7 @@ export class AuthService {
             .set('emailId', RegisterData.emailId)
             .set('dateOfBirth', RegisterData.dateOfBirth)
             .set('confirmPassword', RegisterData.confirmPassword)
+            .set('country',RegisterData.country)
             .set('contactNumber', RegisterData.contactNumber);
         return this.http.post(this.config.resourceUrl + this.pmsRegisterService + url, parameters)
             .pipe(catchError(this.customErrorHandler),

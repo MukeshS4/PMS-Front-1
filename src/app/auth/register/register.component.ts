@@ -11,6 +11,7 @@ import { AuthService } from '../service/auth.service';
 export class RegisterComponent implements OnInit {
 
   registerForm : FormGroup;
+  submitted = false;
   constructor(
     private fb: FormBuilder,
     private authService : AuthService,
@@ -21,6 +22,7 @@ export class RegisterComponent implements OnInit {
       firstName:['',[Validators.required,Validators.minLength(3)]],
       lastName:['',[Validators.required,Validators.minLength(3)]],
       emailId:['',[Validators.required,Validators.email]],
+      country:['',[Validators.required]],
       contactNumber:['',[Validators.required]],
       dateOfBirth:[''],
       password:['',[Validators.required, Validators.pattern("^(?=.*[A-Z])(?=.*[!@#$&*])(?=.*[0-9])(?=.*[a-z]).{8,20}$")]],
@@ -38,10 +40,17 @@ export class RegisterComponent implements OnInit {
       lastName: this.registerForm.controls.lastName.value,
       emailId: this.registerForm.controls.emailId.value,
       dateOfBirth: this.registerForm.controls.dateOfBirth.value,
+      country: this.registerForm.controls.country.value,
       contactNumber: this.registerForm.controls.contactNumber.value,
       password: this.registerForm.controls.password.value,
       confirmPassword: this.registerForm.controls.confirmPassword.value
     }
+    // console.log(RegisterData);
+    // this.submitted = true;
+    // if (this.registerForm.valid) {
+    //   alert('Form Submitted succesfully!!!\n Check the values in browser console.');
+    //   console.table(this.registerForm.value);
+    // }
     this.authService.patientRegister(RegisterData).subscribe((data) => {
       console.log(data);
       if (data  !== null) {
@@ -147,5 +156,8 @@ export class RegisterComponent implements OnInit {
 
   get confirmPasswordControlValid() {
     return this.passwordControl.touched && !this.passwordControlInvalid;
+  }
+  get registerFormControl() {
+    return this.registerForm.controls;
   }
 }

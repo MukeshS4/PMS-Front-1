@@ -30,7 +30,7 @@ import { AuthGaurdService } from './auth/service/auth.guard.service';
     AuthGaurdService,
     PatientService,
     PatientVisitService,
-    ScheduleService
+    ScheduleService,
     {
     provide:HTTP_INTERCEPTORS, useClass:AuthHttpInterceptor, multi:true 
   },
